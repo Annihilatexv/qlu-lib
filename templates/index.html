@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>齐鲁工业大学 图书馆座位预约</title>
+    <style>
+        body {
+            width: 500px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <h3>当前日期[{{dt}}] <br> 当前时间[{{hm}}]</h3>
+
+    <h3>登录抢座!</h3>
+
+    <form action="/post" METHOD="post">
+        <p><label for="id">学号: </label><input id="id" type="text" name="id"></p>
+        <p><label for="password"> 密码: </label><input id="password" type="text" name="password"></p>
+
+        <img src={{code_path}} alt="0.jpg" border="0" />
+
+        <p><label for="check_code"> 验证码: </label><input id="check_code" type="text" name="check_code"></p>
+        <p><label for="day"> 预定明天请填任意值(否则留空): </label><input id="day" type="text" name="day"></p>
+
+        <p><input type="submit"></p>
+    </form>
+
+    <div style="border:1px solid #999;padding:3px; ">
+        <h4>以下区域有座</h4>
+        {% for area in av_seat_list %}
+        <li>{{area.area_id}} &nbsp;: {{area.area_name}}&nbsp;&nbsp; 剩余空座：{{area.available_num}}</li>
+        {% endfor %}
+    </div>
+
+
+    <div style="border:1px solid #999;padding:3px; ">
+        <h4>以下区域无座(可抢)</h4>
+
+        {% for area in un_seat_list %}
+        <li>{{area.area_id}} &nbsp;: {{area.area_name}}&nbsp;&nbsp; 剩余空座：{{area.available_num}}</li>
+        {% endfor %}
+    </div>
+
+    <h5>预约规则(部分)：</h5>
+    <p>4、前日至当日8：30前预约的座位，需9：00前刷卡进馆；8：30后预约当日座位，限30分钟内刷卡进馆；<br> 5、读者可以在8：30之前取消当日的预约座位，8：30之后当日预约的座位不能取消；读者如需取消次日的预约座位，需在次日8：30之前办理。具体操作：点击个人中心--我的预约--取消预约； </p>
+    <h5>违规处理(部分)：</h5>
+    <p>2、被记违约3次，给予警告；被记违约5次，进入黑名单，暂停预约选座权利7天；<br> 3、一学年内两次以上进入黑名单者，暂停预约选座权利30天；<br>每学年结束时，违约记录清零；</p>
+
+    <div align="center">
+        <a href="https://github.com/Annihilatexv/qlu-lib">
+            <img src="./static/img/github.png" alt="github.png" border="0" width="50" height="50" align="middle" />
+        </a>
+    </div>
+    <!-- get示例  -->
+    <!--
+    <h3>GET请求</h3>
+    <p><a href="/get ">get</a></p>
+    -->
+</body>
+
+
+</html>

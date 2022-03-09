@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>区域概况</title>
+    <style>
+        body {
+            width: 500px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>{{deptName}}的{{roleName}}生<br>{{name}}，你好！</h1>
+
+    <h3>以下是{{dt}}的信息：</h3>
+
+    <div style="border:1px solid #999;padding:3px;">
+        <h4>以下区域有座</h4>
+        {% for area in av_seat_list %}
+        <li>{{area.area_id}} &nbsp;: {{area.area_name}}&nbsp;&nbsp; 剩余空座：{{area.available_num}}</li>
+        {% endfor %}
+    </div>
+
+
+    <div style="border:1px solid #999;padding:3px;">
+        <h4>以下区域无座</h4>
+        <h5>无座也可以选</h5>
+        <h5>但是需要抢，提交后会加载，加载过程中在检测座位余量，尽量多选几个区域，慢，但请不要关闭网页</h5>
+        {% for area in un_seat_list %}
+        <li>{{area.area_id}} &nbsp;: {{area.area_name}}&nbsp;&nbsp; 剩余空座：{{area.available_num}}</li>
+        {% endfor %}
+    </div>
+
+
+
+
+    <form action="/book" METHOD="post">
+        <p><label for="area_id_list"> 输入你想要去的区域编号(多个输入用空格隔开)： </label><input id="area_id_list" type="text" name="area_id_list"></p>
+        <p><input type="submit"></p>
+    </form>
+
+
+</body>
+
+</html>
